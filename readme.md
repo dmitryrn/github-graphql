@@ -38,3 +38,12 @@
                              │        vscode only         │
                              └────────────────────────────┘
 ```
+
+issues:
+* babel/preset-typeescript's typescript compiler is not configurable
+* gql endpoint written in multiple places
+* relay watching and compilation to webpack plugin
+* no vscode gql query autocomplete
+
+todo:
+* move relay watching and compilation to webpack plugin

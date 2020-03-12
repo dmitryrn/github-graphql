@@ -2,4 +2,4 @@ schemaPath: ./schema.graphql
 includes: ["**/*.tsx"]
 extensions:
   endpoints:
-    default: https://countries.trevorblades.com
+    default: https://api.github.com/graphql

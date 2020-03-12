@@ -1,8 +1,8 @@
 {
-  "name": "countries-graphql",
+  "name": "github-graphql",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/indedx.tsx",
   "scripts": {
     "start": "webpack-dev-server",
     "relay": "relay-compiler --language typescript --src ./src --schema ./schema.graphql --extensions ts tsx",
@@ -21,6 +21,7 @@
     "@types/react-relay": "^7.0.3",
     "babel-loader": "^8.0.6",
     "babel-plugin-relay": "^9.0.0",
+    "dotenv-webpack": "^1.7.0",
     "graphql": "^14.6.0",
     "react-relay": "^9.0.0",
     "relay-compiler": "^9.0.0",

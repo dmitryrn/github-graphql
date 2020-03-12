@@ -11,9 +11,10 @@ function fetchQuery(
   operation: RequestParameters,
   variables: Variables,
 ) {
-  return fetch('https://countries.trevorblades.com/', {
+  return fetch('https://api.github.com/graphql', {
     method: 'POST',
     headers: {
+      'Authorization': `bearer ${process.env.githubToken}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({

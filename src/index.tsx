@@ -4,15 +4,17 @@ import {graphql, QueryRenderer} from 'react-relay'
 
 import environment from './relay'
 
-import { srcTestQuery } from './__generated__/srcTestQuery.graphql.js'
+import { srcRepoQuery } from './__generated__/srcRepoQuery.graphql'
 
 const App = () => {
-  return  <QueryRenderer<srcTestQuery>
+  return  <QueryRenderer<srcRepoQuery>
     environment={environment}
     query={graphql`
-      query srcTestQuery {
-        country(code: "US") {
+      query srcRepoQuery {
+        repository(name: "countries-graphql", owner: "dmitryrn") {
           name
+          createdAt
+          url
         }
       }
     `}
@@ -24,7 +26,7 @@ const App = () => {
       if (!props) {
         return <div>Loading...</div>
       }
-      return <div>User ID: {props.country?.name}</div>
+      return <div>User ID: {props.repository?.url}</div>
     }}
   />
 }

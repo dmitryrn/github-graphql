@@ -4,8 +4,10 @@ import {graphql, QueryRenderer} from 'react-relay'
 
 import environment from './relay'
 
+import { srcTestQuery } from './__generated__/srcTestQuery.graphql.js'
+
 const App = () => {
-  return  <QueryRenderer
+  return  <QueryRenderer<srcTestQuery>
     environment={environment}
     query={graphql`
       query srcTestQuery {
@@ -22,7 +24,7 @@ const App = () => {
       if (!props) {
         return <div>Loading...</div>
       }
-      return <div>User ID: {props.viewer.id}</div>
+      return <div>User ID: {props.country?.name}</div>
     }}
   />
 }

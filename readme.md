@@ -7,19 +7,19 @@
 `npm start`
 
 ```
-┌──────────────────────────┐                               
-│  webpack is entry point  │                               
-└────────────┬─────────────┘                               
-             │                                             
-             │                                             
-             │               ┌───────────────────────────┐ 
-      ┌──────▼───────┐       │ relay-compiler and stuff  │ 
-      │ babel-loader ├───────▶                           │ 
-      └──────┬───────┘       │  (relay requires babel)   │ 
-             │               └───────────────────────────┘ 
-             │                                             
-             │                                             
-             │                                             
+┌──────────────────────────┐
+│  webpack is entry point  │
+└────────────┬─────────────┘
+             │
+             │
+             │               ┌───────────────────────────┐
+      ┌──────▼───────┐       │ relay-compiler and stuff  │
+      │ babel-loader ├───────▶                           │
+      └──────┬───────┘       │  (relay requires babel)   │
+             │               └───────────────────────────┘
+             │
+             │
+             │
              │              ┌─────────────────────────────┐
              │              │  @babel/preset-typescript   │
              │              │                             │
@@ -27,9 +27,9 @@
                             │      @babel/preset-env      │
                             │                             │
                             └──────────────┬──────────────┘
-                                           │               
-                                           │               
-                                           │               
+                                           │
+                                           │
+                                           │
                              ┌─────────────▼──────────────┐
                              │ preset-typescript uses its │
                              │ own version of typescript, │
@@ -40,10 +40,11 @@
 ```
 
 issues:
-* babel/preset-typeescript's typescript compiler is not configurable
-* gql endpoint written in multiple places
-* relay watching and compilation to webpack plugin
-* no vscode gql query autocomplete
+
+- babel/preset-typeescript's typescript compiler is not configurable and uses 3.7x version (3.8 is last)
+- gql endpoint written in multiple places
+- no vscode gql query autocomplete
 
 todo:
-* move relay watching and compilation to webpack plugin
+
+- move relay watching and compilation to webpack plugin (impossible, I tryed and it does not work)

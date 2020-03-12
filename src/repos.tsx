@@ -1,9 +1,33 @@
 import React from 'react'
-import { graphql, QueryRenderer } from 'react-relay'
+import { graphql, QueryRenderer, createFragmentContainer } from 'react-relay'
 
 import environment from './relay'
 
 import { reposReposListQuery } from './__generated__/reposReposListQuery.graphql'
+import { repos_repo } from './__generated__/repos_repo.graphql'
+
+const RepoItem: React.FC<{
+  repo: repos_repo
+}> = ({ repo }) => {
+  return (
+    <li>
+      {repo?.name} ({repo?.isPrivate ? 'private' : 'public'})
+    </li>
+  )
+}
+
+const RepoItemFragment = createFragmentContainer(RepoItem, {
+  repo: graphql`
+    fragment repos_repo on Repository {
+      name
+      isPrivate
+      url
+      primaryLanguage {
+        name
+      }
+    }
+  `
+})
 
 export const Repos = () => {
   return (
@@ -15,8 +39,8 @@ export const Repos = () => {
             repositories(first: 10) {
               edges {
                 node {
-                  name
-                  url
+                  id
+                  ...repos_repo
                 }
               }
               pageInfo {
@@ -35,11 +59,17 @@ export const Repos = () => {
           return <div>Loading...</div>
         }
         return (
-          <div>
-            {props.viewer.repositories.edges?.map(repo => (
-              <div>{repo?.node?.name}</div>
-            ))}
-          </div>
+          <ul>
+            {props.viewer.repositories.edges?.map(edge =>
+              edge?.node ? (
+                <RepoItemFragment key={edge?.node?.id} repo={edge?.node} />
+              ) : (
+                <li key={edge?.node?.id}>
+                  repo with id ${edge?.node?.id} fetched incorrectly
+                </li>
+              )
+            )}
+          </ul>
         )
       }}
     />

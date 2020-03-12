@@ -6,5 +6,35 @@
 
 `npm start`
 
-babel/preset-typescript does not use tsconfig, it uses it's own version of typescript, at this moment it's 3.7x, so you can't use import type (https://github.com/babel/babel/pull/11171).
-So I use tsconfig.json and typescipt package in package.json for vscode only
+```
+┌──────────────────────────┐                               
+│  webpack is entry point  │                               
+└────────────┬─────────────┘                               
+             │                                             
+             │                                             
+             │               ┌───────────────────────────┐ 
+      ┌──────▼───────┐       │ relay-compiler and stuff  │ 
+      │ babel-loader ├───────▶                           │ 
+      └──────┬───────┘       │  (relay requires babel)   │ 
+             │               └───────────────────────────┘ 
+             │                                             
+             │                                             
+             │                                             
+             │              ┌─────────────────────────────┐
+             │              │  @babel/preset-typescript   │
+             │              │                             │
+             └──────────────▶  and @babel/preset-react,   │
+                            │      @babel/preset-env      │
+                            │                             │
+                            └──────────────┬──────────────┘
+                                           │               
+                                           │               
+                                           │               
+                             ┌─────────────▼──────────────┐
+                             │ preset-typescript uses its │
+                             │ own version of typescript, │
+                             │ so tsconfig.json file and  │
+                             │ typescript package uses by │
+                             │        vscode only         │
+                             └────────────────────────────┘
+```

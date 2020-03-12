@@ -1,5 +1,7 @@
 `brew install watchman # for relay`
 
+get github access token and pass it to .env
+
 `npm i`
 
 `npm run relay:watch`
@@ -44,6 +46,7 @@ issues:
 - babel/preset-typeescript's typescript compiler is not configurable and uses 3.7x version (3.8 is last)
 - gql endpoint written in multiple places
 - no vscode gql query autocomplete
+- github access token should be on the backend
 
 todo:
 

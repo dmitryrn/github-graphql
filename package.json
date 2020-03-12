@@ -23,6 +23,7 @@
     "babel-plugin-relay": "^9.0.0",
     "dotenv-webpack": "^1.7.0",
     "graphql": "^14.6.0",
+    "prettier": "^1.19.1",
     "react-relay": "^9.0.0",
     "relay-compiler": "^9.0.0",
     "relay-compiler-language-typescript": "^12.0.0",

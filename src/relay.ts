@@ -4,23 +4,20 @@ import {
   RecordSource,
   Store,
   Variables,
-  RequestParameters,
+  RequestParameters
 } from 'relay-runtime'
 
-function fetchQuery(
-  operation: RequestParameters,
-  variables: Variables,
-) {
+function fetchQuery(operation: RequestParameters, variables: Variables) {
   return fetch('https://api.github.com/graphql', {
     method: 'POST',
     headers: {
-      'Authorization': `bearer ${process.env.githubToken}`,
-      'Content-Type': 'application/json',
+      Authorization: `bearer ${process.env.githubToken}`,
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({
       query: operation.text,
-      variables,
-    }),
+      variables
+    })
   }).then(response => {
     return response.json()
   })
@@ -28,7 +25,7 @@ function fetchQuery(
 
 const environment = new Environment({
   network: Network.create(fetchQuery),
-  store: new Store(new RecordSource()),
+  store: new Store(new RecordSource())
 })
 
 export default environment

@@ -1,19 +1,19 @@
 const path = require('path')
 
-const Dotenv = require('dotenv-webpack');
+const Dotenv = require('dotenv-webpack')
 
 module.exports = {
   mode: 'development',
   entry: './src/index.tsx',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist')
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: 9000,
-    historyApiFallback: true,
+    historyApiFallback: true
   },
   module: {
     rules: [
@@ -21,15 +21,13 @@ module.exports = {
         test: /\.m?[jt]sx?$/,
         exclude: /(node_modules|bower_components)/,
         use: {
-          loader: 'babel-loader',
-        },
-      },
-    ],
+          loader: 'babel-loader'
+        }
+      }
+    ]
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: ['.ts', '.tsx', '.js']
   },
-  plugins: [
-    new Dotenv(),
-  ],
+  plugins: [new Dotenv()]
 }

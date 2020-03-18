@@ -1,5 +1,5 @@
 schemaPath: ./schema.graphql
-includes: ["**/*.tsx"]
+includes: ['**/*.tsx']
 extensions:
   endpoints:
     default: https://api.github.com/graphql

@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql, QueryRenderer, createFragmentContainer } from 'react-relay'
 
-import environment from './relay'
+import { environment } from './relay'
 
 import { reposReposListQuery } from './__generated__/reposReposListQuery.graphql'
 import { repos_repo } from './__generated__/repos_repo.graphql'

@@ -9,20 +9,26 @@ import { Auth } from './auth'
 
 export const App = () => {
   const isAuthenticated = useSelector(isAuthenticatedSelector)
+  console.log({ isAuthenticated })
 
   return (
     <>
-      {!isAuthenticated && <Redirect push to="/auth" />}
       <Switch>
         <Route path="/auth">
           <Auth />
         </Route>
-        <Route path="/repos">
+
+        {!isAuthenticated && <Redirect push to="/auth" />}
+
+        <Route exact path="/repos">
           <Repos />
         </Route>
-        <Route path="/">
+
+        <Route exact path="/">
           <Link to="/repos">repos</Link>
         </Route>
+
+        <Redirect to="/" />
       </Switch>
     </>
   )

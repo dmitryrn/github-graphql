@@ -1,7 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
+import { Provider as ReduxProvider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
+import { CookiesProvider } from 'react-cookie'
 
 import { store } from './store'
 
@@ -9,13 +10,14 @@ import { App } from './app'
 
 const AppContainer = () => {
   return (
-    <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
-    </Provider>
+    <ReduxProvider store={store}>
+      <CookiesProvider>
+        <Router>
+          <App />
+        </Router>
+      </CookiesProvider>
+    </ReduxProvider>
   )
 }
 
 ReactDOM.render(<AppContainer />, document.querySelector('#root'))
-// https://github.com/login/oauth/authorize?client_id=Iv1.01c1dcafb5618fff&redirect_uri=http://localhost:9000

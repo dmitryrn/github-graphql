@@ -10,6 +10,10 @@ get github access token and pass it to .env
 
 in vscode install prettier extension
 
+## Server
+
+> todo
+
 ```
 ┌──────────────────────────┐
 │  webpack is entry point  │

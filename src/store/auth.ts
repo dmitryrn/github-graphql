@@ -1,6 +1,8 @@
 import { createAction, createReducer, createSelector } from '@reduxjs/toolkit'
 import { Selector } from 'react-redux'
 
+import { Store } from './index'
+
 type State = {
   token: string | null
 }
@@ -17,7 +19,10 @@ export const reducer = createReducer(initialState, builder =>
   })
 )
 
-export const isAuthenticatedSelector: Selector<State, boolean> = createSelector(
-  state => typeof state.token === 'string',
-  _ => _
+const reducerStoreSelector: Selector<Store, State> = state => state.auth
+
+// Selectors
+export const isAuthenticatedSelector = createSelector(
+  reducerStoreSelector,
+  state => typeof state.token === 'string'
 )

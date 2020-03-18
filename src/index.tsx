@@ -1,22 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import { BrowserRouter as Router } from 'react-router-dom'
 
-import { Repos } from './repos'
+import { store } from './store'
 
-const App = () => {
+import { App } from './app'
+
+const AppContainer = () => {
   return (
-    <Router>
-      <Switch>
-        <Route path="/repos">
-          <Repos />
-        </Route>
-        <Route path="/">
-          <Link to="/repos">repos</Link>
-        </Route>
-      </Switch>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
   )
 }
 
-ReactDOM.render(<App />, document.querySelector('#root'))
+ReactDOM.render(<AppContainer />, document.querySelector('#root'))
+// https://github.com/login/oauth/authorize?client_id=Iv1.01c1dcafb5618fff&redirect_uri=http://localhost:9000

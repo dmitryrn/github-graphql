@@ -7,7 +7,7 @@ import {
   RequestParameters
 } from 'relay-runtime'
 
-function fetchQuery(operation: RequestParameters, variables: Variables) {
+const fetchQuery = (operation: RequestParameters, variables: Variables) => {
   return fetch('https://api.github.com/graphql', {
     method: 'POST',
     headers: {

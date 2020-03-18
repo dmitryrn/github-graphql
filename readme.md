@@ -8,6 +8,8 @@ get github access token and pass it to .env
 
 `npm start`
 
+in vscode install prettier extension
+
 ```
 ┌──────────────────────────┐
 │  webpack is entry point  │
@@ -43,10 +45,10 @@ get github access token and pass it to .env
 
 issues:
 
-- babel/preset-typeescript's typescript compiler is not configurable and uses 3.7x version (3.8 is last)
 - gql endpoint written in multiple places
 - no vscode gql query autocomplete
-- github access token should be on the backend
+- ~~github access token should be on the backend~~
+- ~~babel/preset-typeescript's typescript compiler is not configurable and uses 3.7x version (3.8 is last)~~
 
 todo:
 

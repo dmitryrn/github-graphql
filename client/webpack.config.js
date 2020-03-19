@@ -29,5 +29,9 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
   },
-  plugins: [new Dotenv()]
+  plugins: [
+    new Dotenv({
+      path: path.resolve(__dirname, '..', '.env')
+    })
+  ]
 }

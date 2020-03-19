@@ -9,7 +9,6 @@ import { Auth } from './auth'
 
 export const App = () => {
   const isAuthenticated = useSelector(isAuthenticatedSelector)
-  console.log({ isAuthenticated })
 
   return (
     <>

@@ -1,1 +1,5 @@
-see root readme
+npm i
+
+## Development
+
+npm run develop

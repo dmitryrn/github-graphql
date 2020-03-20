@@ -1,35 +1,13 @@
-import path from 'path'
-import assert from 'assert'
-
-import dotenv from 'dotenv'
-
-dotenv.config({
-  path: path.resolve('..', '.env')
-})
-
-assert(process.env.GITHUB_CLIENT_ID?.length, 'GITHUB_CLIENT_ID not provided')
-assert(
-  process.env.GITHUB_CLIENT_SECRET?.length,
-  'GITHUB_CLIENT_SECRET not provided'
-)
-
-import express from 'express'
-import bodyParser from 'body-parser'
+import { NowRequest, NowResponse } from '@now/node'
 import axios from 'axios'
 import query from 'query-string'
-import cors from 'cors' // todo: make cors work only for development mode
 
-const jsonParser = bodyParser.json()
+export default async (req: NowRequest, res: NowResponse) => {
+    if (req.method !== 'POST') {
+      res.status(405)
+    res.end()
+    }
 
-const app = express()
-
-app.use(cors())
-
-app
-  .get('/', (req, res) => {
-    res.end('todo: client here')
-  })
-  .post('/', jsonParser, async (req, res) => {
     const code = req.body?.code
 
     if (typeof code === 'string') {
@@ -57,7 +35,7 @@ app
             accessToken: resData.access_token
           })
         )
-      } catch (error) {
+    } catch (error) {
         res.status(500)
         res.end()
       }
@@ -65,6 +43,4 @@ app
 
     res.status(400)
     res.end('code_param_not_provided')
-  })
-
-app.listen(3000)
+  }

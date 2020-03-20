@@ -80,13 +80,13 @@ export const Auth = () => {
     } else {
       location.href = `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}&redirect_uri=http://localhost:9000/auth`
     }
-  }, [location.search])
+  }, [search])
 
   return (
     <>
       {isError ? (
         <>
-          <p>there was an error trying to authenticate you with github</p>
+          <p>there was an error while trying to authenticate you with github</p>
           <button onClick={tryAgain}>try again</button>
         </>
       ) : (

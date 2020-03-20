@@ -4,5 +4,5 @@
     "@babel/preset-typescript",
     "@babel/preset-env"
   ],
-  "plugins": [["@babel/plugin-transform-runtime"], "relay"]
+  "plugins": ["relay", "@babel/plugin-transform-runtime"]
 }

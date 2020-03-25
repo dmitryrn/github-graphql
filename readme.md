@@ -1,28 +1,14 @@
 ## Development
 
-### Client
+in vscode install prettier extension
 
 `brew install watchman # for relay`
 
-`cd client`
+get github `client_id` and `client_secret` from your `github app` and pass them to `.env` in root and to `.env` in `server` repo
 
-get github `client_id` and `client_secret` from your `github app` and pass them to `.env`
+`npx lerna bootstrap`
 
-`npm i`
-
-`npm run relay:watch`
-
-`npm start`
-
-in vscode install prettier extension
-
-### Server
-
-`cd server`
-
-`npm i`
-
-`npm start`
+`npm run dev`
 
 ## Client bundling scheme
 
@@ -53,7 +39,5 @@ issues:
 
 - gql endpoint written in multiple places
 - no vscode gql query autocomplete
-
-todo:
-
+- server can read .env file in its root only, [zeit/now will add monorepo support](https://github.com/zeit/now/issues/3547#issuecomment-587051749)
 - move relay watching and compilation to webpack plugin (impossible, I tryed and it does not work)

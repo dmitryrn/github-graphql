@@ -1,16 +1,22 @@
 {
-  "name": "github-graphql",
-  "version": "1.0.0",
-  "description": "",
-  "main": "src/indedx.tsx",
+  "name": "client",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Dmitry R <dimanius851@gmail.com>",
+  "homepage": "https://github.com/dmitryrn/github-graphql#readme",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmitryrn/github-graphql.git"
+  },
   "scripts": {
-    "start": "webpack-dev-server",
+    "dev": "webpack-dev-server",
     "relay": "relay-compiler --language typescript --src ./src --schema ./schema.graphql --extensions ts tsx",
     "relay:watch": "npm run relay -- --watch"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dmitryrn/github-graphql/issues"
+  },
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/plugin-transform-runtime": "^7.9.0",

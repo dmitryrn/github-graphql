@@ -3,9 +3,18 @@ import axios from 'axios'
 import query from 'query-string'
 
 export default async (req: NowRequest, res: NowResponse) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:9000')
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
+  res.setHeader('Access-Control-Allow-Headers', '*')
+
+  if (req.method === 'OPTIONS') {
+    res.status(200).end()
+    return
+  }
+
   if (req.method !== 'POST') {
-    res.status(405)
-    res.end()
+    res.status(405).end()
+    return
   }
 
   const code = req.body?.code
@@ -25,22 +34,17 @@ export default async (req: NowRequest, res: NowResponse) => {
 
       if (typeof resData === 'object') {
         if (resData.error === 'bad_verification_code') {
-          res.status(400)
-          res.end('bad_verification_code')
+          res.status(400).end('bad_verification_code')
         }
       }
 
-      res.end(
-        JSON.stringify({
-          accessToken: resData.access_token,
-        })
-      )
+      res.json({
+        accessToken: resData.access_token,
+      })
     } catch (error) {
-      res.status(500)
-      res.end()
+      res.status(500).end()
     }
   }
 
-  res.status(400)
-  res.end('code_param_not_provided')
+  res.status(400).end('code_param_not_provided')
 }

@@ -14,19 +14,20 @@ const requestAccessToken = async (
   accessToken?: string
 }> => {
   try {
-    const res = await fetch('http://localhost:3000', {
+    const res = await fetch('http://localhost:3000/api/access-code', {
       method: 'POST',
       body: JSON.stringify({
-        code
+        code,
       }),
+      mode: 'cors',
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     })
 
     if (res.status === 400) {
       return {
-        error: 'bad_code'
+        error: 'bad_code',
       }
     }
 
@@ -34,16 +35,16 @@ const requestAccessToken = async (
 
     if (typeof data?.accessToken === 'string') {
       return {
-        accessToken: data.accessToken
+        accessToken: data.accessToken,
       }
     }
 
     return {
-      error: 'no_code_returned'
+      error: 'no_code_returned',
     }
   } catch (error) {
     return {
-      error
+      error,
     }
   }
 }

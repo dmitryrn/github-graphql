@@ -1,5 +1,5 @@
 import React from 'react'
-import { gql } from 'apollo-boost'
+import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import produce from 'immer'
 
@@ -44,7 +44,7 @@ export const Repos = () => {
     console.log(error)
     return <div>error. check console</div>
   }
-  console.log(data)
+
   return (
     <div>
       <p>public repositories:</p>

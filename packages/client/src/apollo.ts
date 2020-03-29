@@ -19,11 +19,16 @@ export const client = new ApolloClient({
         )
       if (networkError) console.log(`[Network error]: ${networkError}`)
     }),
+    new ApolloLink((operation, forward) => {
+      operation.setContext({
+        headers: {
+          authorization: `Bearer ${cookies.get('token')}`
+        }
+      })
+      return forward(operation)
+    }),
     new HttpLink({
-      uri: 'https://api.github.com/graphql',
-      headers: {
-        Authorization: `Bearer ${cookies.get('token')}`
-      }
+      uri: 'https://api.github.com/graphql'
     })
   ]),
   cache: new InMemoryCache()

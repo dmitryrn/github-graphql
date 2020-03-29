@@ -26,7 +26,7 @@ export default async (req: NowRequest, res: NowResponse) => {
         {
           client_id: process.env.GITHUB_CLIENT_ID,
           client_secret: process.env.GITHUB_CLIENT_SECRET,
-          code,
+          code
         }
       )
 
@@ -39,7 +39,7 @@ export default async (req: NowRequest, res: NowResponse) => {
       }
 
       res.json({
-        accessToken: resData.access_token,
+        accessToken: resData.access_token
       })
     } catch (error) {
       res.status(500).end()

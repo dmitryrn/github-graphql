@@ -4,9 +4,9 @@ import { HttpLink } from 'apollo-link-http'
 import { onError } from 'apollo-link-error'
 import { ApolloLink } from 'apollo-link'
 
-import { Cookies } from 'react-cookie'
+import { $token } from './store'
 
-const cookies = new Cookies()
+const cache = new InMemoryCache()
 
 export const client = new ApolloClient({
   link: ApolloLink.from([
@@ -22,14 +22,14 @@ export const client = new ApolloClient({
     new ApolloLink((operation, forward) => {
       operation.setContext({
         headers: {
-          authorization: `Bearer ${cookies.get('token')}`
+          authorization: `Bearer ${$token.getState()}`
         }
       })
       return forward(operation)
     }),
     new HttpLink({
-      uri: 'https://api.github.com/graphql'
+      uri: 'https://api.github.com/graphql?fromApollo=1'
     })
   ]),
-  cache: new InMemoryCache()
+  cache
 })

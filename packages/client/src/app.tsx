@@ -1,14 +1,16 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useQuery } from '@apollo/react-hooks'
 import { Switch, Route, Link, Redirect } from 'react-router-dom'
-
-import { isAuthenticatedSelector } from './store/auth'
 
 import { Repos } from './repos'
 import { Auth } from './auth'
 
+import { useStore } from 'effector-react'
+
+import { $token } from './store'
+
 export const App = () => {
-  const isAuthenticated = useSelector(isAuthenticatedSelector)
+  const token = useStore($token)
 
   return (
     <>
@@ -17,7 +19,7 @@ export const App = () => {
           <Auth />
         </Route>
 
-        {!isAuthenticated && <Redirect push to="/auth" />}
+        {!token && <Redirect push to="/auth" />}
 
         <Route exact path="/repos">
           <Repos />

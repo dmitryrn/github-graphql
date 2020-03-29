@@ -1,33 +1,29 @@
 import React, { useEffect, useState } from 'react'
-
 import { useLocation, useHistory } from 'react-router'
-
 import query from 'query-string'
-import { setToken } from './store/auth'
-import { useDispatch } from 'react-redux'
-import { useCookies } from 'react-cookie'
+import { setToken } from './store'
 
 const requestAccessToken = async (
   code: string
 ): Promise<{
-  error?: 'bad_code' | 'no_code_returned'
+  error?: 'bad_code' | 'no_code_returned' | { requestError: any }
   accessToken?: string
 }> => {
   try {
     const res = await fetch('http://localhost:3000/api/access-code', {
       method: 'POST',
       body: JSON.stringify({
-        code,
+        code
       }),
       mode: 'cors',
       headers: {
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     if (res.status === 400) {
       return {
-        error: 'bad_code',
+        error: 'bad_code'
       }
     }
 
@@ -35,16 +31,18 @@ const requestAccessToken = async (
 
     if (typeof data?.accessToken === 'string') {
       return {
-        accessToken: data.accessToken,
+        accessToken: data.accessToken
       }
     }
 
     return {
-      error: 'no_code_returned',
+      error: 'no_code_returned'
     }
   } catch (error) {
     return {
-      error,
+      error: {
+        requestError: error
+      }
     }
   }
 }
@@ -52,8 +50,6 @@ const requestAccessToken = async (
 export const Auth = () => {
   const { search } = useLocation()
   const history = useHistory()
-  const dispatch = useDispatch()
-  const [cookies, setCookies] = useCookies()
 
   const [isError, setIsError] = useState(false)
 
@@ -73,8 +69,8 @@ export const Auth = () => {
 
         // check for both *not any* and *non zero length*
         if (accessToken?.length) {
-          dispatch(setToken(accessToken))
-          setCookies('token', accessToken)
+          setToken(accessToken)
+
           history.replace('/')
         }
       })

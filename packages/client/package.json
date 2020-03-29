@@ -51,6 +51,7 @@
     "effector": "^20.13.4",
     "effector-react": "^20.6.3",
     "graphql-tag": "^2.10.3",
+    "immer": "^6.0.2",
     "query-string": "^6.11.1",
     "react": "^16.13.1",
     "react-cookie": "^4.0.3",

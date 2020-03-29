@@ -1,8 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { ApolloProvider } from '@apollo/react-hooks'
 import { Provider as ReduxProvider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { CookiesProvider } from 'react-cookie'
+
+import { client } from './apollo'
 
 import { store } from './store'
 
@@ -12,9 +15,11 @@ const AppContainer = () => {
   return (
     <ReduxProvider store={store}>
       <CookiesProvider>
-        <Router>
-          <App />
-        </Router>
+        <ApolloProvider client={client}>
+          <Router>
+            <App />
+          </Router>
+        </ApolloProvider>
       </CookiesProvider>
     </ReduxProvider>
   )

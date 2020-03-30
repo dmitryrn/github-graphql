@@ -1,13 +1,15 @@
-const path = require('path')
+import type { Configuration } from 'webpack'
+import Dotenv from 'dotenv-webpack'
 
-const Dotenv = require('dotenv-webpack')
+import path from 'path'
 
-module.exports = {
+const config: Configuration = {
   mode: 'development',
   entry: './src/index.tsx',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/'
   },
   devtool: 'eval-source-map',
   devServer: {
@@ -36,3 +38,5 @@ module.exports = {
     })
   ]
 }
+
+export default config

@@ -10,8 +10,11 @@
     "url": "git+https://github.com/dmitryrn/github-graphql.git"
   },
   "scripts": {
-    "dev": "concurrently -k -n wds,typegen -c blue,cyan \"webpack-dev-server\" \"npm:type-gen\"",
-    "type-gen": "apollo client:codegen --target typescript --watch"
+    "wds": "webpack-dev-server",
+    "dev": "concurrently -i -k -n wds,typegen,storybook -c blue,cyan,magenta \"npm:wds\" \"npm:type-gen\" \"npm:storybook -- --quiet\"",
+    "type-gen": "apollo client:codegen --target typescript --watch",
+    "storybook": "start-storybook -p 6006 --ci",
+    "build-storybook": "build-storybook"
   },
   "bugs": {
     "url": "https://github.com/dmitryrn/github-graphql/issues"
@@ -23,9 +26,15 @@
     "@babel/preset-react": "^7.9.1",
     "@babel/preset-typescript": "^7.9.0",
     "@babel/runtime": "^7.9.2",
+    "@storybook/addon-actions": "^5.3.17",
+    "@storybook/addon-links": "^5.3.17",
+    "@storybook/addons": "^5.3.17",
+    "@storybook/react": "^5.3.17",
+    "@types/dotenv-webpack": "^1.7.0",
     "@types/react": "^16.9.25",
     "@types/react-dom": "^16.9.5",
     "@types/react-router-dom": "^5.1.3",
+    "@types/webpack-dev-server": "^3.10.1",
     "@typescript-eslint/parser": "^2.25.0",
     "babel-loader": "^8.1.0",
     "concurrently": "^5.1.0",

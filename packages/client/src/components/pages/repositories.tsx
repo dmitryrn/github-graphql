@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import produce from 'immer'
 
-import * as Repositories from './__generated__/repositories'
+import * as RepositoriesTypes from './__generated__/repositories'
 
 const query = gql`
   query repositories($after: String) {
@@ -22,10 +22,10 @@ const query = gql`
   }
 `
 
-export const Repos = () => {
+export const Repositories = () => {
   const { loading, error, data, fetchMore } = useQuery<
-    Repositories.repositories,
-    Repositories.repositoriesVariables
+    RepositoriesTypes.repositories,
+    RepositoriesTypes.repositoriesVariables
   >(query, {
     variables: {
       after: null

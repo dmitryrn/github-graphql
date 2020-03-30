@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useHistory } from 'react-router'
 import query from 'query-string'
-import { setToken } from './store'
+import { setToken } from '../../../store'
 
 const requestAccessToken = async (
   code: string

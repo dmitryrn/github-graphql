@@ -1,9 +1,7 @@
 import React from 'react'
-import { useQuery } from '@apollo/react-hooks'
 import { Switch, Route, Link, Redirect } from 'react-router-dom'
 
-import { Repos } from './repos'
-import { Auth } from './auth'
+import { Repositories, Auth } from './components/pages'
 
 import { useStore } from 'effector-react'
 
@@ -22,7 +20,7 @@ export const App = () => {
         {!token && <Redirect push to="/auth" />}
 
         <Route exact path="/repos">
-          <Repos />
+          <Repositories />
         </Route>
 
         <Route exact path="/">

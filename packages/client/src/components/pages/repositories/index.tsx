@@ -1,36 +1,36 @@
-import React from 'react'
-import gql from 'graphql-tag'
+import React, { useCallback } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import produce from 'immer'
 
 import * as RepositoriesTypes from './__generated__/repositories'
 
-const query = gql`
-  query repositories($after: String) {
-    viewer {
-      repositories(after: $after, first: 5) {
-        nodes {
-          id
-          name
-        }
-        pageInfo {
-          endCursor
-          hasNextPage
-        }
-      }
-    }
-  }
-`
+import { reposQuery } from './lib'
 
 export const Repositories = () => {
   const { loading, error, data, fetchMore } = useQuery<
     RepositoriesTypes.repositories,
     RepositoriesTypes.repositoriesVariables
-  >(query, {
+  >(reposQuery, {
     variables: {
       after: null
     }
   })
+
+  const loadMore = useCallback(() => {
+    fetchMore({
+      variables: {
+        after: data!.viewer.repositories.pageInfo.endCursor
+      },
+      updateQuery: (prevRes, { fetchMoreResult }) =>
+        fetchMoreResult
+          ? produce(fetchMoreResult, (draft) => {
+              draft.viewer.repositories.nodes = prevRes.viewer.repositories.nodes!.concat(
+                draft!.viewer.repositories.nodes
+              )
+            })
+          : prevRes
+    })
+  }, [data, fetchMore])
 
   if (loading) {
     return <div>loading</div>
@@ -52,25 +52,7 @@ export const Repositories = () => {
         <div key={repo?.id}>{repo?.name}</div>
       ))}
       {data?.viewer.repositories.pageInfo.hasNextPage && (
-        <button
-          onClick={() => {
-            fetchMore({
-              variables: {
-                after: data.viewer.repositories.pageInfo.endCursor
-              },
-              updateQuery: (prevRes, { fetchMoreResult }) =>
-                fetchMoreResult
-                  ? produce(fetchMoreResult, (draft) => {
-                      draft.viewer.repositories.nodes = prevRes.viewer.repositories.nodes!.concat(
-                        draft!.viewer.repositories.nodes
-                      )
-                    })
-                  : prevRes
-            })
-          }}
-        >
-          load more
-        </button>
+        <button onClick={loadMore}>load more</button>
       )}
     </div>
   )

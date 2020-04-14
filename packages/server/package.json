@@ -22,7 +22,7 @@
     "query-string": "^6.11.1"
   },
   "devDependencies": {
-    "now": "^17.0.4",
+    "now": "^18.0.0",
     "prettier": "^2.0.1",
     "typescript": "^3.8.3"
   }

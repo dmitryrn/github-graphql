@@ -57,7 +57,7 @@
     "apollo-link-error": "^1.1.12",
     "apollo-link-http": "^1.5.16",
     "dotenv": "^8.2.0",
-    "effector": "^20.13.4",
+    "effector": "^21.0.1",
     "effector-react": "^21.0.0",
     "graphql-tag": "^2.10.3",
     "immer": "^7.0.0",
